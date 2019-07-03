@@ -13,6 +13,7 @@ let g:quickfix_max_height = get(g:, 'quickfix_max_height', 10)
 augroup quickfix-height
   autocmd!
   autocmd WinEnter * if &buftype is# 'quickfix' | call quickfix_height#set() | endif
+  autocmd BufWinEnter * if &buftype is# 'quickfix' | call quickfix_height#set() | endif
 augroup END
 
 let &cpoptions = s:save_cpo
