@@ -6,18 +6,17 @@ function! quickfix_height#set() abort
   if max == 0
     return
   endif
-  let height = quickfix_height#_calculate(min, max)
+  let height = quickfix_height#_calculate(min, max, winwidth(0))
   execute height . 'wincmd _'
 endfunction
 
-function! quickfix_height#_calculate(min, max) abort
+function! quickfix_height#_calculate(min, max, winwidth) abort
   let line = 1
   let line_count = 0
-  let winwidth = winwidth(0)
   while line <= line('$')
     " number to float for division
     let length = strlen(getline(line)) + 0.0
-    let width = length / winwidth
+    let width = length / a:winwidth
     let line_count += float2nr(ceil(width))
     if line_count == a:max
       continue
